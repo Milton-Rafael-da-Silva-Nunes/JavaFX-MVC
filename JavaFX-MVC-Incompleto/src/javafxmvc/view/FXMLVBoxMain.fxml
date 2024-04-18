@@ -14,7 +14,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleMenuIntemCadastrosCategorias" text="Categorias" />
                   <MenuItem fx:id="menuItemCadastrosClientes" mnemonicParsing="false" onAction="#handleMenuIntemCadastrosClientes" text="Clientes" />
-                  <MenuItem mnemonicParsing="false" text="Produtos" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenuIntemCadastrosProdutos" text="Produtos" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Processos">

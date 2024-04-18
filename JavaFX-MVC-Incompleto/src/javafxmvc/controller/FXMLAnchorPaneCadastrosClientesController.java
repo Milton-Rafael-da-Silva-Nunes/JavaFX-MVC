@@ -64,7 +64,7 @@ public class FXMLAnchorPaneCadastrosClientesController implements Initializable 
         carregarTableViewClientes();
 
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionarItemTableViewClientes(newValue));
+        (observable, oldValue, newValue) -> selecionarItemTableViewClientes(newValue)) ;
     }
 
     public void carregarTableViewClientes() {
@@ -125,7 +125,7 @@ public class FXMLAnchorPaneCadastrosClientesController implements Initializable 
             carregarTableViewClientes();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, escolha uma cliente na Tabela!");
+            alert.setContentText("Por favor, escolha um cliente na Tabela!");
             alert.show();
         }
     }

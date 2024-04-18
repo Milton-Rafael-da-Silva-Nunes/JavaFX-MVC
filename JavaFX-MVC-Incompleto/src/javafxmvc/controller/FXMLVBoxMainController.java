@@ -28,17 +28,24 @@ public class FXMLVBoxMainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
+    } 
     
     @FXML
     public void handleMenuIntemCadastrosClientes() throws IOException {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosClientes.fxml"));
         anchorPane.getChildren().setAll(a);
-    }
+    } 
     
     @FXML
     public void handleMenuIntemCadastrosCategorias() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneCadastroCategorias.fxml"));
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosCategorias.fxml"));
         anchorPane.getChildren().setAll(a);
     }
+    
+    @FXML
+    public void handleMenuIntemCadastrosProdutos() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosProdutos.fxml"));
+        anchorPane.getChildren().setAll(a);
+    }
+    
 }
