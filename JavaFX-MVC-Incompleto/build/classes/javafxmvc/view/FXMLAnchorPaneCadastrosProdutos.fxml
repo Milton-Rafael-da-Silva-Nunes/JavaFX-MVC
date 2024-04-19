@@ -70,9 +70,6 @@
             <TableColumn fx:id="tableColumnProdutoPreco" prefWidth="100.0" resizable="false" text="Preço" />
             <TableColumn fx:id="tableColumnProdutoEstoque" prefWidth="96.0" resizable="false" text="Estoque" />
         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
       </TableView>
       <Group layoutX="328.0" layoutY="329.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>

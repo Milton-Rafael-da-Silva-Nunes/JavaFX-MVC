@@ -19,9 +19,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafxmvc.model.dao.CategoriaDAO;
 import javafxmvc.model.dao.ProdutoDAO;
 import javafxmvc.model.database.Database;
 import javafxmvc.model.database.DatabaseFactory;
+import javafxmvc.model.domain.Categoria;
 import javafxmvc.model.domain.Produto;
 
 /**
@@ -30,16 +32,6 @@ import javafxmvc.model.domain.Produto;
  */
 public class FXMLAnchorPaneCadastrosProdutosController implements Initializable {
 
-    @FXML
-    private Label labelProdutoCodigo;
-    @FXML
-    private Label labelProdutoNome;
-    @FXML
-    private Label labelProdutoPreco;
-    @FXML
-    private Label labelProdutoEstoque;
-    @FXML
-    private Label labelProdutoCategoriaNome;
     @FXML
     private TableView tableViewProdutos;
     @FXML
@@ -50,6 +42,16 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     private TableColumn<Produto, Double> tableColumnProdutoPreco;
     @FXML
     private TableColumn<Produto, Double> tableColumnProdutoEstoque;
+    @FXML
+    private Label labelProdutoCodigo;
+    @FXML
+    private Label labelProdutoNome;
+    @FXML
+    private Label labelProdutoPreco;
+    @FXML
+    private Label labelProdutoEstoque;
+    @FXML
+    private Label labelProdutoCategoriaNome;
     @FXML
     private Button buttonInserir;
     @FXML
@@ -63,10 +65,12 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     private final Database database = DatabaseFactory.getDatabase("postgresql");
     private final Connection connection = database.conectar();
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
+    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         produtoDAO.setConnection(connection);
+        categoriaDAO.setConnection(connection);
         carregarTableViewProdutos();
 
         tableViewProdutos.getSelectionModel().selectedItemProperty().addListener(
@@ -105,7 +109,8 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     @FXML
     public void hundleButtonInserir() throws IOException {
         Produto produto = new Produto();
-        boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto);
+        List<Categoria> categorias = categoriaDAO.listar();
+        boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto, categorias);
         if (buttonConfirmarClicked) {
             produtoDAO.inserir(produto);
             carregarTableViewProdutos();
@@ -115,13 +120,14 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     @FXML
     public void hundleButtonAlterar() throws IOException {
         Produto produto = (Produto) tableViewProdutos.getSelectionModel().getSelectedItem();
-        if (produto != null) {
-            boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto);
+        List<Categoria> categorias = categoriaDAO.listar();
+        if (produto != null && categorias != null) {
+            boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto, categorias);
             if (buttonConfirmarClicked) {
                 produtoDAO.alterar(produto);
                 carregarTableViewProdutos();
-            } 
-        } else { 
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Por favor, escolha um Produto na Tabela!");
             alert.show();
@@ -141,11 +147,11 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
         }
     }
 
-    private boolean showFXMLAnchorPaneCadastrosProdutosDialog(Produto produto) throws IOException {
+    private boolean showFXMLAnchorPaneCadastrosProdutosDialog(Produto produto, List<Categoria> categorias) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneCadastrosClientesDialogController.class.getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosProdutosDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
-
+        
         // Criando um Estágio de Diálogo (Stage Dialog)
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Cadastro de Produtos");
@@ -156,6 +162,7 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
         FXMLAnchorPaneCadastrosProdutosDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setProduto(produto);
+        controller.setCategorias(categorias);
 
         // Abre a tela de alteração e espera o usuario fechar.
         dialogStage.showAndWait();
