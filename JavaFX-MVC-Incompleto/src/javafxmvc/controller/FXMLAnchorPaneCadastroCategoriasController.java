@@ -10,12 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
 import javafxmvc.model.dao.CategoriaDAO;
 import javafxmvc.model.database.Database;
 import javafxmvc.model.database.DatabaseFactory;
@@ -34,10 +32,6 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
     @FXML
     private TableColumn<Categoria, String> tableColumnCategoriaNome;
     @FXML
-    private GridPane gridPaneCategoria;
-    @FXML
-    private Label labelCategoriaCodigo;
-    @FXML
     private TextField textFielCategoriaNome;
     @FXML
     private Button buttonInserir;
@@ -45,8 +39,6 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
     private Button buttonAlterar;
     @FXML
     private Button buttonRemover;
-    @FXML
-    private Button gripPaneCategoriaButtonSalvar;
 
     private List<Categoria> listCategorias;
     private ObservableList<Categoria> observableListCategorias;
@@ -74,39 +66,51 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
 
     @FXML
     public void hundleButtonInserir() {
-        gridPaneCategoria.setVisible(true);
+
     }
 
     @FXML
     public void hundleButtonAlerar() {
-        gridPaneCategoria.setVisible(true);
-        Categoria categoria = tableViewCategorias.getSelectionModel().getSelectedItem();
-        if(categoria != null) {
-            categoriaDAO.alterar(categoria);
-            carregarTableViewCategorias();
-        }
+        
     }
 
     @FXML
     public void hundleButtonRemover() {
-
-    }
-
-    @FXML
-    public void hundleGridPaneButtonSalvar() {
-        Categoria categoria = new Categoria(); 
-        categoria.setDescricao(textFielCategoriaNome.getText());
-        salvarDadosNovaCategoria(categoria);
-        gridPaneCategoria.setVisible(false);
-    }
-
-    private void salvarDadosNovaCategoria(Categoria categoria) {
-        if (validarDadosNovaCategoria()) {
-            categoriaDAO.inserir(categoria);
+        Categoria categoria = tableViewCategorias.getSelectionModel().getSelectedItem();
+        if (categoria != null) {
+            categoriaDAO.remover(categoria);
             carregarTableViewCategorias();
         }
     }
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private boolean validarDadosNovaCategoria() {
         String errorMessage = "";
         String nomeNovaCategoria = textFielCategoriaNome.getText();
