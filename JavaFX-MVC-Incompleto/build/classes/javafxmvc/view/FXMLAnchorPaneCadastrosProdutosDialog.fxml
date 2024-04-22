@@ -25,10 +25,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nome" />
-            <Label text="Preço" GridPane.rowIndex="1" />
-            <Label text="Estoque" GridPane.rowIndex="2" />
-            <Label text="Categoria" GridPane.rowIndex="3" />
+            <Label text="Nome">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Preço" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Estoque" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Categoria" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="textFieldProdutoNome" GridPane.columnIndex="1" />
             <TextField fx:id="textFieldProdutoPreco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="textFieldProdutoEstoque" GridPane.columnIndex="1" GridPane.rowIndex="2" />
