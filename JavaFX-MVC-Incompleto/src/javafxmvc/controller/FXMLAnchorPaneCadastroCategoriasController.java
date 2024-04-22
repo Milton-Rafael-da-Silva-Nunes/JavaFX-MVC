@@ -1,5 +1,6 @@
 package javafxmvc.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.List;
@@ -7,13 +8,16 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafxmvc.model.dao.CategoriaDAO;
 import javafxmvc.model.database.Database;
 import javafxmvc.model.database.DatabaseFactory;
@@ -32,8 +36,6 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
     @FXML
     private TableColumn<Categoria, String> tableColumnCategoriaNome;
     @FXML
-    private TextField textFielCategoriaNome;
-    @FXML
     private Button buttonInserir;
     @FXML
     private Button buttonAlterar;
@@ -51,7 +53,6 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
         categoriaDAO.setConnection(connection);
         carregarTableViewCategorias();
-        gridPaneCategoria.setVisible(false);
     }
 
     public void carregarTableViewCategorias() {
@@ -65,13 +66,29 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
     }
 
     @FXML
-    public void hundleButtonInserir() {
-
+    public void hundleButtonInserir() throws IOException {
+        Categoria categoria = new Categoria();
+        boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosClientesDialog(categoria);
+        if(buttonConfirmarClicked) {
+            categoriaDAO.inserir(categoria);
+            carregarTableViewCategorias();
+        }
     }
 
     @FXML
-    public void hundleButtonAlerar() {
-        
+    public void hundleButtonAlerar() throws IOException {
+        Categoria categoria = tableViewCategorias.getSelectionModel().getSelectedItem();
+        if(categoria != null) {
+            boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosClientesDialog(categoria);
+            if(buttonConfirmarClicked) {
+                categoriaDAO.alterar(categoria);
+                carregarTableViewCategorias();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, escolha uma categoria na Tabela!");
+            alert.show();
+        }
     }
 
     @FXML
@@ -80,54 +97,32 @@ public class FXMLAnchorPaneCadastroCategoriasController implements Initializable
         if (categoria != null) {
             categoriaDAO.remover(categoria);
             carregarTableViewCategorias();
-        }
-    }
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    private boolean validarDadosNovaCategoria() {
-        String errorMessage = "";
-        String nomeNovaCategoria = textFielCategoriaNome.getText();
-
-        if (nomeNovaCategoria == null || nomeNovaCategoria.length() == 0) {
-            errorMessage += "Digite o nome da Categoria!\n";
-        }
-
-        if (errorMessage.isEmpty()) {
-            return true;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro no cadastro");
-            alert.setContentText("Campos invalidos, por favor, corrija-os...");
-            alert.setContentText(errorMessage);
+            alert.setContentText("Por favor, escolha uma categoria na Tabela!");
             alert.show();
-            return false;
         }
     }
+
+    private boolean showFXMLAnchorPaneCadastrosClientesDialog(Categoria categoria) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(FXMLAnchorPaneCadastrosClientesDialogController.class.getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosCategoriasDialog.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+        
+        // Criando um Estágio de Diálogo (Stage Dialog)
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Cadastro de Categorias");
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        // Setando o cliente no controller
+        FXMLAnchorPaneCadastrosCategoriasDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setCategoria(categoria);
+        
+        // Abre a tela de alteração e espera o usuario fechar.
+        dialogStage.showAndWait();
+        
+        return controller.isButtonConfirmarClicked();
+    }    
 }
