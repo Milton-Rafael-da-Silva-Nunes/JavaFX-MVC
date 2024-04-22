@@ -84,9 +84,9 @@
                   </GridPane>
                   <Group layoutX="89.0" layoutY="316.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <children>
-                        <Button fx:id="buttonInserir" mnemonicParsing="false" prefWidth="80.0" text="Inserir" />
-                        <Button fx:id="buttonAlterar" layoutX="89.0" mnemonicParsing="false" prefWidth="80.0" text="Alterar" />
-                        <Button fx:id="buttonRemover" layoutX="178.0" mnemonicParsing="false" prefWidth="80.0" text="Remover" />
+                        <Button fx:id="buttonInserir" mnemonicParsing="false" onAction="#hundleButtonInserir" prefWidth="80.0" text="Inserir" />
+                        <Button fx:id="buttonAlterar" layoutX="89.0" mnemonicParsing="false" onAction="#hundleButtonAlterar" prefWidth="80.0" text="Alterar" />
+                        <Button fx:id="buttonRemover" layoutX="178.0" mnemonicParsing="false" onAction="#hundleButtonRemover" prefWidth="80.0" text="Remover" />
                      </children>
                   </Group>
                </children>

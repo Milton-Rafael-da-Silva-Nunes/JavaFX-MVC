@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneCadastroCategoriasController.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneCadastrosClientesController.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneCadastrosCategoriasDialogController.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/view/FXMLAnchorPaneProcessosVendasDialog.fxml</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneProcessosVendasDialogController.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneProcessosVendasController.java</file>
             <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLVBoxMainController.java</file>
         </group>
     </open-files>
