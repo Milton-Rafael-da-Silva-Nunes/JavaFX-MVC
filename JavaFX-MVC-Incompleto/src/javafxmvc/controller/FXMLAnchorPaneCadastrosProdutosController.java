@@ -109,8 +109,7 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     @FXML
     public void hundleButtonInserir() throws IOException {
         Produto produto = new Produto();
-        List<Categoria> categorias = categoriaDAO.listar();
-        boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto, categorias);
+        boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto);
         if (buttonConfirmarClicked) {
             produtoDAO.inserir(produto);
             carregarTableViewProdutos();
@@ -120,9 +119,8 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
     @FXML
     public void hundleButtonAlterar() throws IOException {
         Produto produto = (Produto) tableViewProdutos.getSelectionModel().getSelectedItem();
-        List<Categoria> categorias = categoriaDAO.listar();
-        if (produto != null && categorias != null) {
-            boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto, categorias);
+        if (produto != null) {
+            boolean buttonConfirmarClicked = showFXMLAnchorPaneCadastrosProdutosDialog(produto);
             if (buttonConfirmarClicked) {
                 produtoDAO.alterar(produto);
                 carregarTableViewProdutos();
@@ -147,7 +145,7 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
         }
     }
 
-    private boolean showFXMLAnchorPaneCadastrosProdutosDialog(Produto produto, List<Categoria> categorias) throws IOException {
+    private boolean showFXMLAnchorPaneCadastrosProdutosDialog(Produto produto) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(FXMLAnchorPaneCadastrosProdutosController.class.getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosProdutosDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
@@ -162,7 +160,6 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
         FXMLAnchorPaneCadastrosProdutosDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setProduto(produto);
-        controller.setCategorias(categorias);
 
         // Abre a tela de alteração e espera o usuario fechar.
         dialogStage.showAndWait();
