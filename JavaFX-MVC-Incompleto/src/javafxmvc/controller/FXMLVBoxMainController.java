@@ -60,4 +60,10 @@ public class FXMLVBoxMainController implements Initializable {
         anchorPane.getChildren().setAll(a);
     }
     
+    @FXML
+    public void handleMenuItemRelatoriosQuantidadeProdutoEmEstoque() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/javafxmvc/view/FXMLAnchorPaneRelatorioQuantidadeDeProdutoEmEstoque.fxml"));
+        anchorPane.getChildren().setAll(a);
+    }
+    
 }
