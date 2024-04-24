@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/model/domain/Venda.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneProcessosVendasDialogController.java</file>
-            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneProcessosVendasController.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/model/dao/VendaDAO.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLAnchorPaneGraficosVendasPorMesController.java</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/view/FXMLAnchorPaneGraficosVendasPorMes.fxml</file>
+            <file>file:/D:/PROGRAMAÇÃO/JavaFX/CRUD%20-%20JAVAFX/JavaFX-MVC-Incompleto/src/javafxmvc/controller/FXMLVBoxMainController.java</file>
         </group>
     </open-files>
 </project-private>
