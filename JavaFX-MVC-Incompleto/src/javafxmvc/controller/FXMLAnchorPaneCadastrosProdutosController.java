@@ -149,7 +149,7 @@ public class FXMLAnchorPaneCadastrosProdutosController implements Initializable 
 
     private boolean showFXMLAnchorPaneCadastrosProdutosDialog(Produto produto, List<Categoria> categorias) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(FXMLAnchorPaneCadastrosClientesDialogController.class.getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosProdutosDialog.fxml"));
+        loader.setLocation(FXMLAnchorPaneCadastrosProdutosController.class.getResource("/javafxmvc/view/FXMLAnchorPaneCadastrosProdutosDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
         
         // Criando um Estágio de Diálogo (Stage Dialog)

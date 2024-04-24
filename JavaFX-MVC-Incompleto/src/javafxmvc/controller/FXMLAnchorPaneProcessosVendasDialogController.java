@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -45,7 +46,7 @@ public class FXMLAnchorPaneProcessosVendasDialogController implements Initializa
     @FXML
     private Button buttonAdicionar;
     @FXML
-    private TableView<ItemDeVenda> tableViewVendaItensDeVenda;
+    private TableView<ItemDeVenda> tableViewItensDeVenda;
     @FXML
     private TableColumn<ItemDeVenda, Produto> tableColumnItemDeVendaProduto;
     @FXML
@@ -87,8 +88,38 @@ public class FXMLAnchorPaneProcessosVendasDialogController implements Initializa
     }
 
     @FXML
-    public void hundleButtonConfirmar() {
+    public void hundleButtonAdicionarProduto() {
+        Produto produto;
+        ItemDeVenda itemDeVenda = new ItemDeVenda();
+        if (comboBoxVendaProdutos.getSelectionModel().getSelectedItem() != null) {
+            produto = (Produto) comboBoxVendaProdutos.getSelectionModel().getSelectedItem();
+            if (produto.getQuantidade() >= Integer.parseInt(textFieldItemDeVendaQuantidade.getText())) {
+                itemDeVenda.setProduto((Produto) comboBoxVendaProdutos.getSelectionModel().getSelectedItem());
+                itemDeVenda.setQuantidade(Integer.parseInt(textFieldItemDeVendaQuantidade.getText()));
+                itemDeVenda.setValor(itemDeVenda.getProduto().getPreco() * itemDeVenda.getQuantidade());
+                venda.getItensDeVenda().add(itemDeVenda);
+                venda.setValor(venda.getValor() + itemDeVenda.getValor());
+                observableListItensDeVenda = FXCollections.observableArrayList(venda.getItensDeVenda());
+                tableViewItensDeVenda.setItems(observableListItensDeVenda);
+                textFieldVendaTotal.setText(String.format("%.2f", venda.getValor()));
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Problema na escolha do Produto!");
+                alert.setContentText("Não axiste a quantidade de produtos disponivel em estoque.");
+                alert.show();
+            }
+        }
+    }
 
+    @FXML
+    public void hundleButtonConfirmar() {
+        if(validarEntradaDeDadosVenda()) {
+            venda.setCliente((Cliente) comboBoxVendaCliente.getSelectionModel().getSelectedItem());
+            venda.setPago(checkBoxVendaPago.isSelected());
+            venda.setData(datePickerVendaData.getValue());
+            buttonConfirmarClicked = true;
+            dialogStage.close();
+        }
     }
 
     @FXML
@@ -130,5 +161,30 @@ public class FXMLAnchorPaneProcessosVendasDialogController implements Initializa
 
     public void setVenda(Venda venda) {
         this.venda = venda;
+    }
+    
+    private boolean validarEntradaDeDadosVenda() {
+        String errorMessage = "";
+        
+        if (comboBoxVendaCliente.getSelectionModel().getSelectedItem() == null) {
+            errorMessage += "Cliente inválido!\n";
+        }
+        if (datePickerVendaData.getValue() == null) {
+            errorMessage += "Data da venda inválida!\n";
+        }
+        if (observableListItensDeVenda == null) {
+            errorMessage += "Itens de Venda inválidos!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro no cadastro");
+            alert.setContentText("Campos invalidos, por favor, corrija-os...");
+            alert.setContentText(errorMessage);
+            alert.show();
+            return false;
+        }
     }
 }

@@ -24,11 +24,11 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="331.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="111.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -69,13 +69,13 @@
                <children>
                   <ComboBox fx:id="comboBoxVendaProdutos" prefHeight="25.0" prefWidth="200.0" promptText="Selecione o Produto" />
                   <TextField fx:id="textFieldItemDeVendaQuantidade" prefHeight="25.0" prefWidth="36.0" />
-                  <Button fx:id="buttonAdicionar" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Adicionar" />
+                  <Button fx:id="buttonAdicionar" mnemonicParsing="false" onAction="#hundleButtonAdicionarProduto" prefHeight="25.0" prefWidth="92.0" text="Adicionar" />
                </children>
             </HBox>
-            <TableView fx:id="tableViewVendaItensDeVenda" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TableView fx:id="tableViewItensDeVenda" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <columns>
                 <TableColumn fx:id="tableColumnItemDeVendaProduto" prefWidth="148.0" text="Produto" />
-                <TableColumn fx:id="tableColumnItemDeVendaQuantidade" prefWidth="70.0" text="Quantidade" />
+                <TableColumn fx:id="tableColumnItemDeVendaQuantidade" prefWidth="70.0" text="Qtde" />
                   <TableColumn fx:id="tableColumnItemDeVendaValor" prefWidth="75.0" text="Valor" />
               </columns>
             </TableView>
@@ -89,7 +89,7 @@
       </Label>
       <Group layoutX="256.0" layoutY="349.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="25.0">
          <children>
-            <Button fx:id="buttonConfirmar" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Confirmar">
+            <Button fx:id="buttonConfirmar" mnemonicParsing="false" onAction="#hundleButtonConfirmar" prefHeight="25.0" prefWidth="80.0" text="Confirmar">
                <font>
                   <Font size="11.0" />
                </font></Button>
