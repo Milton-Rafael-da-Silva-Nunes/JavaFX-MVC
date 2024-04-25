@@ -41,12 +41,10 @@ public class FXMLAnchorPaneCadastrosProdutosDialogController implements Initiali
     private boolean buttonConfirmarClicked = false;
     private Produto produto;
     private List<Categoria> listCategorias;
-    
+
     private final Database database = DatabaseFactory.getDatabase("postgresql");
     private final Connection connection = database.conectar();
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
-    
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,7 +76,7 @@ public class FXMLAnchorPaneCadastrosProdutosDialogController implements Initiali
     public Produto getProduto() {
         return produto;
     }
-    
+
     public void setProduto(Produto produto) {
         this.produto = produto;
         this.textFieldProdutoNome.setText(produto.getNome());
@@ -90,7 +88,7 @@ public class FXMLAnchorPaneCadastrosProdutosDialogController implements Initiali
     @FXML
     public void hundleButtonConfirmar() {
         if (validarEntradaDeDadosProdutos()) {
-            
+
             produto.setNome(textFieldProdutoNome.getText());
             produto.setPreco(Double.valueOf(textFieldProdutoPreco.getText()));
             produto.setQuantidade(Integer.valueOf(textFieldProdutoEstoque.getText()));
@@ -123,7 +121,7 @@ public class FXMLAnchorPaneCadastrosProdutosDialogController implements Initiali
         if (estoque == null || estoque.length() == 0) {
             errorMessage += "Adicione o estoque do produto!\n";
         }
-        if(categoriaSelecionada == null) {
+        if (categoriaSelecionada == null) {
             errorMessage += "Selecione uma Categoria para o produto!\n";
         }
 

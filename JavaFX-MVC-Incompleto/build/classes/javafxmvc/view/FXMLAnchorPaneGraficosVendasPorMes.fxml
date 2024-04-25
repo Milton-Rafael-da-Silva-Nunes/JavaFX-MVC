@@ -7,7 +7,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="378.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmvc.controller.FXMLAnchorPaneGraficosVendasPorMesController">
    <children>
-      <BarChart fx:id="barChart" layoutX="56.0" layoutY="34.0" prefHeight="311.0" prefWidth="500.0" title="Vendas por Mês" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="34.0">
+      <BarChart fx:id="barChart" layoutX="56.0" layoutY="34.0" prefHeight="311.0" prefWidth="500.0" title="Vendas por Mês" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <xAxis>
           <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
         </xAxis>

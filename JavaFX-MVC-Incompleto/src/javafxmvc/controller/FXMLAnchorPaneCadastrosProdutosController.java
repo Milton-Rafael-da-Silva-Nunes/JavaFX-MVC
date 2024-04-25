@@ -23,7 +23,6 @@ import javafxmvc.model.dao.CategoriaDAO;
 import javafxmvc.model.dao.ProdutoDAO;
 import javafxmvc.model.database.Database;
 import javafxmvc.model.database.DatabaseFactory;
-import javafxmvc.model.domain.Categoria;
 import javafxmvc.model.domain.Produto;
 
 /**

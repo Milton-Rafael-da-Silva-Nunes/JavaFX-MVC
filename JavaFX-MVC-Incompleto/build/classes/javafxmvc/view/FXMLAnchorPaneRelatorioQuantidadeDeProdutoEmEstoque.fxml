@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -58,7 +60,7 @@
                </font></Label>
          </children>
       </GridPane>
-      <Label layoutX="220.0" layoutY="2.0" text="Produtos em Estoque">
+      <Label alignment="CENTER" layoutX="-1.0" layoutY="2.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: #cecece;" text="Produtos em Estoque" textAlignment="JUSTIFY" AnchorPane.bottomAnchor="353.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -68,5 +70,8 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <Button fx:id="buttonImprimirPDF" layoutX="425.0" layoutY="322.0" mnemonicParsing="false" onAction="#hundleButtonImprimirPDF" text="Imprimir PDF" AnchorPane.bottomAnchor="20.0" />
+      <Separator layoutX="342.0" layoutY="76.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.leftAnchor="341.0" />
+      <Separator layoutX="583.0" layoutY="76.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.rightAnchor="3.0" />
    </children>
 </AnchorPane>

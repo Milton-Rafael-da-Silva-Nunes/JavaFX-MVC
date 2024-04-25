@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,6 +19,13 @@ import javafxmvc.model.dao.ProdutoDAO;
 import javafxmvc.model.database.Database;
 import javafxmvc.model.database.DatabaseFactory;
 import javafxmvc.model.domain.Produto;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -39,6 +47,8 @@ public class FXMLAnchorPaneRelatorioQuantidadeDeProdutoEmEstoqueController imple
     private Label labelQtdeEstoque;
     @FXML
     private Label labelValorEstoque;
+    @FXML
+    private Button buttonImprimirPDF;
 
     private List<Produto> listProdutos;
     private ObservableList observableListProdutos;
@@ -69,7 +79,7 @@ public class FXMLAnchorPaneRelatorioQuantidadeDeProdutoEmEstoqueController imple
                 produtosEmEstoque.add(produto);
             }
         }
-        
+
         labelQtdeProdutos.setText(String.valueOf(sumQtdeProdutos));
         labelQtdeEstoque.setText(String.valueOf(sumQtdeEstoques));
         labelValorEstoque.setText(String.format("%.2f", sumValorEstques));
@@ -81,5 +91,20 @@ public class FXMLAnchorPaneRelatorioQuantidadeDeProdutoEmEstoqueController imple
             observableListProdutos = FXCollections.observableArrayList(listProdutos);
             tableViewProdutos.setItems(observableListProdutos);
         }
+    }
+
+    @FXML
+    public void hundleButtonImprimirPDF() throws JRException {
+        URL url = getClass().getResource("/javafxmvc/relatorios/JAVAFXRelatorioProdutosEstoque.jasper");
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+        // Preencher o relatório
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
+
+        // Visualizar o relatório (opcional)
+        JasperViewer.viewReport(jasperPrint, false);
+
+        // Exportar para PDF (opcional)
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "Relatorio de Produto com Estoque.pdf");
     }
 }

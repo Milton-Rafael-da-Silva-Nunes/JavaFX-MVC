@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JAVAFXRelatorioProdutosEstoque" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1fc3d88-4254-4256-94fa-5fb4ef43c5e7">
+	<property name="ireport.zoom" value="2.853116706110003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT p.cdproduto, p.nome, p.preco, p.quantidade, c.descricao as categoria FROM produtos p
+inner join categorias c on c.cdcategoria = p.cdcategoria
+where p.quantidade > 0
+order by p.cdproduto;]]>
+	</queryString>
+	<field name="cdproduto" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="preco" class="java.lang.Double"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="categoria" class="java.lang.String"/>
+	<variable name="totalEstoque" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{preco} * $F{quantidade}]]></variableExpression>
+	</variable>
+	<variable name="qtdEstoque" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+	</variable>
+	<variable name="qtdProdutos" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{cdproduto}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="2a2e2cf5-12b5-44b8-a44c-6f857987247b" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="36453374-b910-4af2-af27-6ec9c55190db" x="20" y="20" width="374" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Produtos com Estoque]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="c67a263e-44f7-4c94-9bab-0d9ec946a19b" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="933f0e66-cac9-4029-994c-2d3ebbd8c1ff" mode="Opaque" x="-20" y="0" width="83" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[       Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91e77940-ab57-4c64-83c4-2f3ec7fb9c76" mode="Opaque" x="63" y="0" width="193" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ae867c39-8999-4676-a521-3c558f3d778b" mode="Opaque" x="256" y="0" width="87" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c1a3132-e292-44a5-b875-db69f6f2ed35" mode="Opaque" x="343" y="0" width="87" height="20" backcolor="#CCCCCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ed99e659-d330-4270-af40-3e676e99cf7f" mode="Opaque" x="430" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None"/>
+				<text><![CDATA[Categoria       ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14">
+			<line>
+				<reportElement uuid="66debdd0-ab71-4d83-b960-cfaf9cfff9ae" positionType="FixRelativeToBottom" x="0" y="13" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="a9905ac0-3d8b-49e9-b365-49a00206175f" x="0" y="0" width="63" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cdproduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="50d6fb33-6787-4ecc-b981-6b68fa659972" x="63" y="0" width="193" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="156dd147-cae8-44db-adcc-9d7fd505168e" x="256" y="0" width="87" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA['R$ ' + $F{preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c2db574-100a-4d8a-a6f1-fae1a375bc28" x="343" y="0" width="87" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0d81041-19a5-4f2b-a412-0a320372afdb" x="430" y="0" width="125" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="39">
+			<staticText>
+				<reportElement uuid="0fc84784-c9c3-4a22-80ba-edb9e62996a2" x="436" y="0" width="70" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Qtde Produtos: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0fc84784-c9c3-4a22-80ba-edb9e62996a2" x="436" y="13" width="70" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Qtde Estoque : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0fc84784-c9c3-4a22-80ba-edb9e62996a2" x="436" y="26" width="70" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Estoque : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4f1966a3-eb8a-4f85-b84f-4354a1b7fbc3" mode="Opaque" x="506" y="26" width="49" height="13" forecolor="#FFFFFF" backcolor="#006699"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalEstoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="096ecdf2-a6fa-4323-8e20-3ee0d2441c61" mode="Opaque" x="506" y="13" width="49" height="13" forecolor="#FFFFFF" backcolor="#006699"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{qtdEstoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d7deb7c-59fa-4bce-a7e3-52a764dd3b1a" mode="Opaque" x="506" y="0" width="49" height="13" forecolor="#FFFFFF" backcolor="#006699"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{qtdProdutos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="13">
+			<textField>
+				<reportElement uuid="9b6bb276-71b3-415b-9b85-6f322947e5c8" mode="Opaque" x="0" y="0" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bcb38ca8-5eaa-4915-97ec-a25874dc35c4" mode="Opaque" x="515" y="0" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="458156ac-ec1c-4d50-913f-88bb5d910c9d" x="0" y="0" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
